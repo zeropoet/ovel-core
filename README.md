@@ -1,2 +1,2 @@
-# OVEL
-A cosmological operating system where archetypes are modular behaviors
+# ØVEL
+A cøsmøløgical øperating system where archetypes are mødular behaviørs.
