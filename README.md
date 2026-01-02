@@ -1,132 +1,177 @@
-# ØVEL : A Planetary Systems Engine
+# OVEL — ABSOLUTE SPECIFICATION
 
-OVEL is an interactive planetary simulation engine built in p5.js.
-It models archetypal forces (Jupiter, Saturn, etc.) not as symbols, but as **governing behaviors** acting on a shared field.
+OVEL is a constraint system.
 
-This is not a game.
-This is not a productivity tool.
-This is not a prediction engine.
+It is not:
 
-OVEL exists to **make systemic balance visible**.
+* a theme
+* a narrative
+* a visual identity
+* a sound aesthetic
+* a metaphor
+* a community experiment
 
----
-
-## Core Premise
-
-Planets do not control objects.
-They regulate **relationships**.
-
-Each planetary class defines:
-
-* How growth occurs
-* How limits are enforced
-* How errors are handled
-* How time is experienced
-
-Meaning emerges from interaction, not instruction.
+Any attempt to treat it as such is incorrect.
 
 ---
 
-## Ethos (Read Before Using)
+## 1. Law (Non-Negotiable)
 
-### 1. No Optimization
+**Invariant:**
 
-OVEL is not designed to be “won,” optimized, or solved.
+```
+136
+```
 
-If a configuration feels powerful, it will eventually destabilize.
-If it feels stable, it will eventually stagnate.
+This value is final.
 
-Balance is **temporary by design**.
+* It is not symbolic
+* It is not approximate
+* It is not contextual
 
----
+Any system, output, artifact, sound, image, animation, or code path that does not resolve to **exactly 136** under validation **is not OVEL**.
 
-### 2. No Moral Scoring
-
-The system does not judge.
-It does not reward virtue or punish failure.
-
-It demonstrates **tradeoffs**, not outcomes.
-
----
-
-### 3. No Deletion Without Consequence
-
-Nothing is removed without cost.
-Collapse leaves traces.
-Failure persists.
-
-Mercy redistributes — it does not erase.
+No exceptions.
+No “close enough.”
+No aesthetic override.
 
 ---
 
-### 4. The User Is Not a God
+## 2. Structure (No Interpretation Layer)
 
-Interaction is constrained.
-Invocations carry cost.
-Some states resist interference.
+OVEL is implemented as a **3D relational constraint engine**.
 
-If the system refuses you, it is functioning correctly.
+* Nodes contribute numeric value
+* Traversals compute sums
+* Multiple independent traversals must agree
+* Agreement is identity
 
----
-
-### 5. Time Is Not Neutral
-
-Time is cyclical, uneven, and irreversible.
-
-Waiting is an action.
-Silence is meaningful.
-Decay is not a bug.
+If a result depends on *how* you traverse the system to remain meaningful, it is invalid.
 
 ---
 
-## What This Is For
+## 3. Planets Are Functions, Not Symbols
 
-* Reflection on systems and governance
-* Exploration of growth vs constraint
-* Ritualized systems thinking
-* Generative art that refuses completion
+Planetary names exist solely as **behavioral labels**.
 
----
+They do not imply mythology.
+They do not imply belief.
+They do not imply spirituality.
 
-## What This Is Not For
+They map to *specific, enforced behaviors*:
 
-* Productivity optimization
-* Behavioral prediction
-* Gamification
-* Financial extraction
-* Fast content
+* **Saturn**
+  Redistributes pressure without altering sum
+  Introduces resistance, delay, and refusal
+  If Saturn fails, execution stops
 
----
+* **Jupiter**
+  Expands influence without adding value
+  Cannot operate without Saturn
+  If expansion alters the invariant, the system is lying
 
-## Design Principle
+* **Sun**
+  Verifies equivalence across all valid paths
+  If paths disagree, identity collapses
+  Sun failure invalidates the work entirely
 
-> **Expand only what can remain whole.**
-
-If a feature violates this principle, it does not belong here.
-
----
-
-## Status
-
-OVEL is a living system.
-It is allowed to be unfinished.
-It is allowed to be difficult.
-It is allowed to resist you.
+All planetary behavior is testable.
+None of it is optional.
 
 ---
 
-## License (Philosophical)
+## 4. Canonical vs Non-Canonical (Hard Line)
 
-You may fork, study, and extend this system.
+A work is **canonical** if and only if:
 
-You may not:
+1. All required traversals resolve to 136
+2. Saturn redistribution preserves 136
+3. Jupiter expansion preserves 136
+4. The Sun confirms equivalence
 
-* Strip it of context
-* Reduce it to metrics
-* Use it to manipulate or coerce
+If any condition fails:
 
-Respect the field.
+* the work may exist
+* it may be displayed
+* it may be interesting
+
+But it is **explicitly not OVEL**.
+
+This distinction is enforced in code and documentation.
+There is no soft acceptance.
 
 ---
 
-*This project is an experiment in cosmology as code.*
+## 5. Sound Is Verification
+
+Sound is not expressive in OVEL.
+Sound is **audit output**.
+
+* Traversals → harmonic structures
+* Saturn → temporal resistance
+* Jupiter → spectral expansion
+* Sun → tonic collapse
+
+If it sounds coherent but fails validation, it is rejected.
+If it validates but sounds unpleasant, it is accepted.
+
+Taste is irrelevant.
+Truth is not.
+
+---
+
+## 6. Glyphs Are Residue, Not Design
+
+OVEL glyphs are never authored.
+
+They emerge from:
+
+* traversal intersections
+* constraint density
+* expansion overlap
+* final collapse
+
+If a glyph is designed first and justified later, it is invalid.
+
+---
+
+## 7. Transparency Clause
+
+Nothing in OVEL is hidden.
+
+* All constraints are explicit
+* All validation rules are visible
+* All failures are detectable
+* All canonical decisions are reproducible
+
+If something cannot be explained mechanically, it does not belong in the system.
+
+---
+
+## 8. Refusal Is a Feature
+
+OVEL is allowed to say **no**.
+
+* No to collaborators
+* No to outputs
+* No to expansions
+* No to interpretations
+
+A system that cannot refuse is decorative.
+OVEL is not decorative.
+
+---
+
+## 9. Final Definition (Exact)
+
+OVEL is a system in which:
+
+> Multiple independent paths
+> must resolve to the same invariant
+> under constraint, expansion, and verification
+> without exception.
+
+If it survives that process, it is OVEL.
+If it does not, it is not.
+
+No ambiguity remains.
