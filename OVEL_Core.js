@@ -1,163 +1,109 @@
-const OVEL_INVARIANT = 136;
+let system;
+let activeZ = 0;
+let activeTraversal = 0;
 
-class Traversal {
-    constructor(name, nodes) {
-        this.name = name;
-        this.nodes = nodes;
-    }
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+    colorMode(HSB, 255);
 
-    resolve() {
-        return this.nodes.reduce((s, n) => s + n.value, 0);
-    }
-
-    assertInvariant() {
-        const r = this.resolve();
-        if (Math.abs(r - OVEL_INVARIANT) > 0.0001) {
-            throw new Error(
-                `TRAVERSAL FAILURE [${this.name}]: ${r} ≠ ${OVEL_INVARIANT}`
-            );
-        }
-        return true;
-    }
+    // minimal mode
+    system = new SolarSystem(true);
 }
 
+function draw() {
+    background(10, 10, 20);
 
-class CubeField {
-    constructor(size = 4) {
-        this.size = size;
-        this.nodes = [];
-        this.time = 0;
+    system.update();
 
-        let raw = [];
-        for (let x = 0; x < size; x++) {
-            for (let y = 0; y < size; y++) {
-                for (let z = 0; z < size; z++) {
-                    raw.push(new CubeNode(x, y, z, random()));
-                }
-            }
-        }
+    // --- DRAW FULL SLICE ---
+    drawCubeSlice(system.cube, activeZ);
 
-        this.nodes = this.normalizeToInvariant(raw);
-    }
+    // --- HIGHLIGHT ACTIVE TRAVERSAL ---
+    highlightTraversal(system.cube.allTraversals()[activeTraversal]);
 
-    normalizeToInvariant(nodes) {
-        const sum = nodes.reduce((s, n) => s + n.value, 0);
-        nodes.forEach(n => {
-            n.value = (n.value / sum) * OVEL_INVARIANT;
+    // --- SHOW TRAVERSAL SUM ---
+    const traversal = system.cube.allTraversals()[activeTraversal];
+    const sum = traversal.resolve();
+    noStroke();
+    fill(0, 0, 255);
+    textSize(18);
+    text(
+        `Traversal: ${traversal.name} | Sum: ${sum.toFixed(2)}`,
+        20,
+        30
+    );
+}
+
+// Map cube node coordinates to canvas coordinates
+function projectNodeToScreen(n, cubeSize) {
+    const margin = 50;
+    const w = width - margin * 2;
+    const h = height - margin * 2;
+    const scaleX = w / cubeSize;
+    const scaleY = h / cubeSize;
+
+    const x = margin + n.x * scaleX + scaleX / 2;
+    const y = margin + n.y * scaleY + scaleY / 2;
+
+    return { x, y };
+}
+
+// Draw one z-slice with Saturn load and Jupiter expansion
+function drawCubeSlice(cube, z) {
+    const scale = min(width, height) / cube.size;
+
+    cube.nodes
+        .filter(n => n.z === z)
+        .forEach(n => {
+            const { x: px, y: py } = projectNodeToScreen(n, cube.size);
+
+            // Saturn load → node color
+            let hueVal = map(n.load, 0, 1, 50, 255);
+            let brightness = map(n.load, 0, 1, 80, 255);
+            noStroke();
+            fill(200, hueVal, brightness);
+            circle(px, py, scale * 0.6);
+
+            // Jupiter expansion → halo
+            let expansion = (1 - n.load) * 100;
+            noFill();
+            stroke(120, 255, 255, 150);
+            strokeWeight(2);
+            circle(px, py, scale * 0.6 + expansion);
         });
-        return nodes;
+}
+
+// Highlight a traversal
+function highlightTraversal(traversal) {
+    const scale = min(width, height) / system.cube.size;
+
+    stroke(0, 0, 255);
+    strokeWeight(3);
+    noFill();
+
+    beginShape();
+    traversal.nodes.forEach(n => {
+        const { x, y } = projectNodeToScreen(n, system.cube.size);
+        vertex(x, y);
+    });
+    endShape();
+}
+
+// --- INTERACTION ---
+// 'Z' cycles z slices
+// 'T' cycles traversals
+function keyPressed() {
+    if (key === 'Z' || key === 'z') {
+        activeZ = (activeZ + 1) % system.cube.size;
     }
 
-    resolve() {
-        return this.nodes.reduce((s, n) => s + n.value, 0);
-    }
-
-    nodeAt(x, y, z) {
-        return this.nodes.find(
-            n => n.x === x && n.y === y && n.z === z
-        );
-    }
-
-    /* ───────── TRAVERSAL GENERATORS ───────── */
-
-    xLines() {
-        const t = [];
-        for (let y = 0; y < this.size; y++) {
-            for (let z = 0; z < this.size; z++) {
-                t.push(new Traversal(
-                    `X(y=${y},z=${z})`,
-                    [...Array(this.size)].map(x => this.nodeAt(x, y, z))
-                ));
-            }
-        }
-        return t;
-    }
-
-    yLines() {
-        const t = [];
-        for (let x = 0; x < this.size; x++) {
-            for (let z = 0; z < this.size; z++) {
-                t.push(new Traversal(
-                    `Y(x=${x},z=${z})`,
-                    [...Array(this.size)].map(y => this.nodeAt(x, y, z))
-                ));
-            }
-        }
-        return t;
-    }
-
-    zLines() {
-        const t = [];
-        for (let x = 0; x < this.size; x++) {
-            for (let y = 0; y < this.size; y++) {
-                t.push(new Traversal(
-                    `Z(x=${x},y=${y})`,
-                    [...Array(this.size)].map(z => this.nodeAt(x, y, z))
-                ));
-            }
-        }
-        return t;
-    }
-
-    spaceDiagonals() {
-        const s = this.size - 1;
-        return [
-            new Traversal("D(0→n,0→n,0→n)",
-                [...Array(this.size)].map(i => this.nodeAt(i, i, i))
-            ),
-            new Traversal("D(0→n,0→n,n→0)",
-                [...Array(this.size)].map(i => this.nodeAt(i, i, s - i))
-            ),
-            new Traversal("D(0→n,n→0,0→n)",
-                [...Array(this.size)].map(i => this.nodeAt(i, s - i, i))
-            ),
-            new Traversal("D(n→0,0→n,0→n)",
-                [...Array(this.size)].map(i => this.nodeAt(s - i, i, i))
-            )
-        ];
-    }
-
-    allTraversals() {
-        return [
-            ...this.xLines(),
-            ...this.yLines(),
-            ...this.zLines(),
-            ...this.spaceDiagonals()
-        ];
+    if (key === 'T' || key === 't') {
+        activeTraversal =
+            (activeTraversal + 1) %
+            system.cube.allTraversals().length;
     }
 }
 
-
-class Sun extends Planet {
-    constructor() {
-        super("Sun", 1);
-    }
-
-    apply(cube) {
-        const traversals = cube.allTraversals();
-        traversals.forEach(t => t.assertInvariant());
-    }
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
 }
-
-
-class SolarSystem {
-    constructor() {
-        this.cube = new CubeField(4);
-        this.planets = [
-            new Saturn(),
-            new Jupiter(),
-            new Sun()
-        ];
-    }
-
-    update() {
-        this.cube.update();
-        this.planets.forEach(p => {
-            if (frameCount % p.cycleRate === 0) {
-                p.apply(this.cube);
-            }
-        });
-    }
-}
-
-
