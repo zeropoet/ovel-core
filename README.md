@@ -1,177 +1,143 @@
-# OVEL — ABSOLUTE SPECIFICATION
+# OVEL
 
-OVEL is a constraint system.
-
-It is not:
-
-* a theme
-* a narrative
-* a visual identity
-* a sound aesthetic
-* a metaphor
-* a community experiment
-
-Any attempt to treat it as such is incorrect.
+**An Invariant Framework for Coherent Continuity**
 
 ---
 
-## 1. Law (Non-Negotiable)
+## What OVEL Is
 
-**Invariant:**
+OVEL is **not** a belief system, mythology, or moral code.
 
-```
-136
-```
+OVEL is an **invariant**:
+a constraint that determines what kinds of structures, agents, and systems can *persist* across manifestations without collapsing into incoherence.
 
-This value is final.
-
-* It is not symbolic
-* It is not approximate
-* It is not contextual
-
-Any system, output, artifact, sound, image, animation, or code path that does not resolve to **exactly 136** under validation **is not OVEL**.
-
-No exceptions.
-No “close enough.”
-No aesthetic override.
+OVEL does not judge intentions.
+OVEL does not reward belief.
+OVEL only permits **coherence-bearing structures** to continue.
 
 ---
 
-## 2. Structure (No Interpretation Layer)
+## The Core Insight
 
-OVEL is implemented as a **3D relational constraint engine**.
+Evolution is not a linear ladder, nor a random walk.
 
-* Nodes contribute numeric value
-* Traversals compute sums
-* Multiple independent traversals must agree
-* Agreement is identity
+Evolution is **earned continuity**.
 
-If a result depends on *how* you traverse the system to remain meaningful, it is invalid.
+What persists from one manifestation to the next is not memory, identity, or narrative —
+it is **Structural Capacity**: the ability to hold truth, power, and consequence without destabilizing the larger system.
 
----
-
-## 3. Planets Are Functions, Not Symbols
-
-Planetary names exist solely as **behavioral labels**.
-
-They do not imply mythology.
-They do not imply belief.
-They do not imply spirituality.
-
-They map to *specific, enforced behaviors*:
-
-* **Saturn**
-  Redistributes pressure without altering sum
-  Introduces resistance, delay, and refusal
-  If Saturn fails, execution stops
-
-* **Jupiter**
-  Expands influence without adding value
-  Cannot operate without Saturn
-  If expansion alters the invariant, the system is lying
-
-* **Sun**
-  Verifies equivalence across all valid paths
-  If paths disagree, identity collapses
-  Sun failure invalidates the work entirely
-
-All planetary behavior is testable.
-None of it is optional.
+Death is not a failure state.
+It is a **commit point**.
 
 ---
 
-## 4. Canonical vs Non-Canonical (Hard Line)
+## Structural Capacity (SC)
 
-A work is **canonical** if and only if:
+Structural Capacity is the sole quantity that carries forward.
 
-1. All required traversals resolve to 136
-2. Saturn redistribution preserves 136
-3. Jupiter expansion preserves 136
-4. The Sun confirms equivalence
+Informally:
 
-If any condition fails:
+> SC measures how much reality an agent can sustain without breaking itself or the system it inhabits.
 
-* the work may exist
-* it may be displayed
-* it may be interesting
+SC increases only when coherence is preserved under constraint.
 
-But it is **explicitly not OVEL**.
-
-This distinction is enforced in code and documentation.
-There is no soft acceptance.
+Any apparent gain achieved through deception, denial, or contradiction is treated as entropy — and is pruned by reality itself.
 
 ---
 
-## 5. Sound Is Verification
+## The OVEL Invariants
 
-Sound is not expressive in OVEL.
-Sound is **audit output**.
+OVEL formalizes constraints that reality already enforces:
 
-* Traversals → harmonic structures
-* Saturn → temporal resistance
-* Jupiter → spectral expansion
-* Sun → tonic collapse
+1. **Coherence Conservation**
+   No system may increase local power by decreasing global intelligibility.
 
-If it sounds coherent but fails validation, it is rejected.
-If it validates but sounds unpleasant, it is accepted.
+2. **Non-Contradiction Across Scales**
+   What stabilizes an individual may not destabilize the whole.
 
-Taste is irrelevant.
-Truth is not.
+3. **Irreversibility Acknowledgment**
+   Actions with permanent consequences must be modeled as permanent.
 
----
+4. **Entropy Honesty**
+   Illusions of order count as disorder.
 
-## 6. Glyphs Are Residue, Not Design
+5. **Constraint Respect**
+   Freedom emerges from navigating constraints, not violating them.
 
-OVEL glyphs are never authored.
-
-They emerge from:
-
-* traversal intersections
-* constraint density
-* expansion overlap
-* final collapse
-
-If a glyph is designed first and justified later, it is invalid.
+These are not ethical preferences.
+They are **survival conditions**.
 
 ---
 
-## 7. Transparency Clause
+## Species, Civilizations, and Agents
 
-Nothing in OVEL is hidden.
+Individuals are not the unit of evolution.
 
-* All constraints are explicit
-* All validation rules are visible
-* All failures are detectable
-* All canonical decisions are reproducible
+Species, cultures, and civilizations function as **distributed solvers** exploring constraint space in parallel.
 
-If something cannot be explained mechanically, it does not belong in the system.
+When a constraint is solved coherently:
 
----
+* it becomes baseline
+* future manifestations no longer need to relearn it
+* myths remember it as a “gift,” “fall,” or “age”
 
-## 8. Refusal Is a Feature
+When a solution is incoherent:
 
-OVEL is allowed to say **no**.
-
-* No to collaborators
-* No to outputs
-* No to expansions
-* No to interpretations
-
-A system that cannot refuse is decorative.
-OVEL is not decorative.
+* collapse is delayed, not avoided
+* the system resets at a lower structural level
 
 ---
 
-## 9. Final Definition (Exact)
+## Why OVEL Is Experiential First
 
-OVEL is a system in which:
+OVEL cannot be taught through explanation alone.
 
-> Multiple independent paths
-> must resolve to the same invariant
-> under constraint, expansion, and verification
-> without exception.
+Understanding follows **felt constraint**.
 
-If it survives that process, it is OVEL.
-If it does not, it is not.
+Before simulations, visuals, or code, OVEL must be encountered as:
 
-No ambiguity remains.
+* irreversibility
+* consequence
+* diminishing or expanding intelligibility
+
+Any implementation that allows “winning” without coherence is invalid.
+
+---
+
+## What This Project Is Building Toward
+
+This repository does **not yet** contain a full simulation.
+
+It is a staging ground for:
+
+* experiential interfaces
+* irreversible interaction designs
+* future visual, sonic, and computational instantiations of OVEL
+
+Code will follow experience — not precede it.
+
+---
+
+## What This Is Not
+
+* Not a religion
+* Not a game with optimal strategies
+* Not a self-help framework
+* Not a narrative about good and evil
+
+OVEL describes **what can continue**, not what should be worshipped.
+
+---
+
+## Status
+
+**Active / Foundational**
+
+The invariant is locked.
+The next phase is experiential instantiation.
+
+---
+
+## One-Line Summary
+
+> **OVEL forbids advancement through incoherence, allowing only structures that can bear the truth they generate to persist across manifestations.**
