@@ -2,9 +2,26 @@ body {
     background-color: #000000;
 }
 
+ul li {
+    display: inline;
+    margin-right: 42px;
+    margin-top:0px;
+}
+
 p {
     font-family: monospace;
-    font-size: 18px;
-    font-weight: 200;
+    font-size: 17px;
+    color: #ffffff;
+}
+
+a  {
+    text-decoration: none;
+    background-color: none;
+    color: #e1e1e1;
+}
+
+a:hover {
+    text-decoration: none;
+    background-color: none;
     color: #ffffff;
 }
