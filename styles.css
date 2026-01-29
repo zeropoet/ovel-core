@@ -4,8 +4,7 @@ body {
 
 ul li {
     display: inline;
-    margin-right: 42px;
-    margin-top:0px;
+    margin: 10px;
 }
 
 p {
