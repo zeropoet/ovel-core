@@ -1,4 +1,4 @@
-# OVEL
+# ØVEL
 
 **OVEL is the invariant that determines whether a structure can continue.**
 
