@@ -1,10 +1,10 @@
 body {
-    background-color: #e1e1e1;
+    background-color: #000000;
 }
 
 p {
     font-family: monospace;
     font-size: 18px;
     font-weight: 200;
-    color: #000000;
+    color: #ffffff;
 }
