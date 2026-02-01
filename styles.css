@@ -15,12 +15,10 @@ p {
 
 a  {
     text-decoration: none;
-    background-color: none;
     color: #e1e1e1;
 }
 
 a:hover {
     text-decoration: none;
-    background-color: none;
     color: #ffffff;
 }
