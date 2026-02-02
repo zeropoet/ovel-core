@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab9e4cd4-7ade-4e93-9c54-a9bb51178e27" name="Changes" comment=".">
+    <list default="true" id="ab9e4cd4-7ade-4e93-9c54-a9bb51178e27" name="Changes" comment="The Covenant of Care">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +78,8 @@
       <workItem from="1769920090043" duration="30000" />
       <workItem from="1769920131220" duration="348000" />
       <workItem from="1769921220313" duration="92000" />
-      <workItem from="1770069338511" duration="1641000" />
+      <workItem from="1770069338511" duration="1880000" />
+      <workItem from="1770071510525" duration="16000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <option name="closed" value="true" />
@@ -104,7 +105,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769921305485</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="The Covenant of Care">
+      <option name="closed" value="true" />
+      <created>1770071262955</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1770071262955</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,6 +121,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="The Covenant of Care" />
+    <option name="LAST_COMMIT_MESSAGE" value="The Covenant of Care" />
   </component>
 </project>
