@@ -7,7 +7,6 @@
     <list default="true" id="ab9e4cd4-7ade-4e93-9c54-a9bb51178e27" name="Changes" comment="🜂">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sketch.js" beforeDir="false" afterPath="$PROJECT_DIR$/sketch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/velas.js" beforeDir="false" afterPath="$PROJECT_DIR$/velas.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +92,7 @@
       <workItem from="1770318383293" duration="9581000" />
       <workItem from="1770382589981" duration="11000" />
       <workItem from="1770382647248" duration="19000" />
-      <workItem from="1770382826956" duration="1886000" />
+      <workItem from="1770382826956" duration="3151000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <option name="closed" value="true" />
@@ -159,7 +158,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770382567528</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="🜂">
+      <option name="closed" value="true" />
+      <created>1770385393692</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1770385393692</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,6 +177,7 @@
     <MESSAGE value="The Covenant of Care" />
     <MESSAGE value="" />
     <MESSAGE value="*" />
-    <option name="LAST_COMMIT_MESSAGE" value="*" />
+    <MESSAGE value="" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>

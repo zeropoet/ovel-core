@@ -50,6 +50,7 @@ function draw() {
   sun.applySwell();
   sun.show();
 
+
   for (let vela of velas) {
     vela.update();
     vela.showTrail();
@@ -65,6 +66,8 @@ function draw() {
     noFill();
     let cx = crosshairPos.x;
     let cy = crosshairPos.y;
+    line(cx - 3, cy - 3, cx + 3, cy + 3);
+    line(cx + 3, cy - 3, cx - 3, cy + 3);
     line(cx - 6, cy, cx + 6, cy);
     line(cx, cy - 6, cx, cy + 6);
     pop();
