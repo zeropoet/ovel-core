@@ -20,7 +20,7 @@ function setup() {
 
   background(220);
 
-  sun = new Vela(width / 2, height / 2, 0, 0, 1000, true);
+  sun = new Vela(width / 2, height / 2, 0, 0, 300, true);
   crosshairPos = createVector(width / 2, height / 2);
   crosshairVel = createVector(0, 0);
 
@@ -56,7 +56,6 @@ function draw() {
   updateCrosshair();
 
   if (showCrosshair) {
-    blendMode(BLEND);
     push();
     stroke(255, 0, 0, 200);
     strokeWeight(1);
@@ -66,6 +65,7 @@ function draw() {
     line(cx - 6, cy, cx + 6, cy);
     line(cx, cy - 6, cx, cy + 6);
     pop();
+    filter(INVERT);
   }
 
 

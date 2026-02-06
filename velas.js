@@ -43,15 +43,16 @@ class Vela {
   showTrail() {
     if (abs(this.pos.x - this.prev.x) > width / 2) return;
     if (abs(this.pos.y - this.prev.y) > height / 2) return;
-    stroke(255, 20);
+    stroke(0, 10);
     strokeWeight(3);
     line(this.prev.x, this.prev.y, this.pos.x, this.pos.y);
   }
 
   show() {
     if (this.isSun) {
-      noFill();
+      fill(255);
       stroke(255);
+      //strokeWeight(20);
     } else {
       fill(0);
     }
