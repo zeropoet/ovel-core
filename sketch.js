@@ -1,7 +1,7 @@
 let velas = [];
 let sun;
 let cnv;
-let showCrosshair = false;
+let showCrosshair = true;
 let crosshairPos;
 let crosshairVel;
 const crosshairSpeed = 0.35;
@@ -28,7 +28,7 @@ function setup() {
     let x = random(width);
     let y = random(height);
     let v = p5.Vector.random2D();
-    let m = random(50, 150);
+    let m = random(5, 10);
     velas[i] = new Vela(x, y, v.x, v.y, m);
   }
 }
@@ -36,7 +36,7 @@ function setup() {
 function draw() {
   background(220, 90);
 
-  sun.show();
+  sun.beginSwell();
 
   for (let vela of velas) {
     sun.attract(vela);
@@ -46,6 +46,9 @@ function draw() {
       }
     }
   }
+
+  sun.applySwell();
+  sun.show();
 
   for (let vela of velas) {
     vela.update();
@@ -65,7 +68,7 @@ function draw() {
     line(cx - 6, cy, cx + 6, cy);
     line(cx, cy - 6, cx, cy + 6);
     pop();
-    filter(INVERT);
+    //filter(INVERT);
   }
 
 
