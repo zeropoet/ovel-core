@@ -1,6 +1,6 @@
-# ØVEL
+# OVEL
 
-**OVEL is the invariant that determines whether a structure can continue.**
+OVEL is the invariant that determines whether a structure can continue.
 
 It does not define meaning, purpose, or value.
 It defines persistence.
