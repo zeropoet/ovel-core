@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab9e4cd4-7ade-4e93-9c54-a9bb51178e27" name="Changes" comment="🌞" />
+    <list default="true" id="ab9e4cd4-7ade-4e93-9c54-a9bb51178e27" name="Changes" comment="🜂🌞">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,7 +106,9 @@
       <workItem from="1770581019797" duration="604000" />
       <workItem from="1770662078276" duration="104000" />
       <workItem from="1770662372167" duration="346000" />
-      <workItem from="1770663370106" duration="352000" />
+      <workItem from="1770663370106" duration="641000" />
+      <workItem from="1770665493881" duration="454000" />
+      <workItem from="1770665957624" duration="6000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <option name="closed" value="true" />
@@ -218,7 +222,23 @@
       <option name="project" value="LOCAL" />
       <updated>1770663392507</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="🜂🌞">
+      <option name="closed" value="true" />
+      <created>1770663911742</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1770663911742</updated>
+    </task>
+    <task id="LOCAL-00016" summary="🜂🌞">
+      <option name="closed" value="true" />
+      <created>1770665938351</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1770665938351</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +249,8 @@
     <MESSAGE value="The Covenant of Care" />
     <MESSAGE value="" />
     <MESSAGE value="*" />
+    <MESSAGE value="" />
+    <MESSAGE value="" />
     <MESSAGE value="" />
     <MESSAGE value="" />
     <MESSAGE value="" />
