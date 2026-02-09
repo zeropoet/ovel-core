@@ -106,8 +106,8 @@ class Vela {
   show() {
     if (this.isSun) {
       stroke(255, this.sunAlpha);
-      strokeWeight(20);
-      noFill();
+      strokeWeight(42);
+      //noFill();
     } else {
       fill(0);
     }
