@@ -7,7 +7,7 @@ let crosshairVel;
 const CROSSHAIR_SPEED = 0.35;
 const CROSSHAIR_MAX_SPEED = 6;
 const CROSSHAIR_MASS = 120;
-const VELA_COUNT = 12;
+const VELA_COUNT = 12 + 1;
 const VELA_MASS_MIN = 50;
 const VELA_MASS_MAX = 100;
 const BACKGROUND_COLOR = [255, 50];
