@@ -97,8 +97,8 @@ class Vela {
   showTrail() {
     if (abs(this.pos.x - this.prev.x) > width / 2) return;
     if (abs(this.pos.y - this.prev.y) > height / 2) return;
-    stroke(255, 5);
-    strokeWeight(5);
+    stroke(0, 1);
+    strokeWeight(100);
     line(this.prev.x, this.prev.y, this.pos.x, this.pos.y);
   }
 
@@ -106,8 +106,8 @@ class Vela {
   show() {
     if (this.isSun) {
       stroke(255, this.sunAlpha);
-      strokeWeight(42);
-      //noFill();
+      strokeWeight(1);
+      // noFill();
     } else {
       fill(0);
     }
