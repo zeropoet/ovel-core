@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ab9e4cd4-7ade-4e93-9c54-a9bb51178e27" name="Changes" comment="🜂🌞🌑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sketch.js" beforeDir="false" afterPath="$PROJECT_DIR$/sketch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/velas.js" beforeDir="false" afterPath="$PROJECT_DIR$/velas.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +111,7 @@
       <workItem from="1770665493881" duration="454000" />
       <workItem from="1770665957624" duration="6000" />
       <workItem from="1770666005199" duration="512000" />
-      <workItem from="1770690601283" duration="2920000" />
+      <workItem from="1770690601283" duration="4533000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <option name="closed" value="true" />
@@ -257,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770692953190</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="🜂🌞🌑">
+      <option name="closed" value="true" />
+      <created>1770693843338</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1770693843338</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
