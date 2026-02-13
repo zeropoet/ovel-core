@@ -11,7 +11,7 @@ const VELA_COUNT = 211 + 4;
 const VELA_MASS_MIN = 1;
 const VELA_MASS_MAX = 100;
 const BACKGROUND_COLOR = [255, 20];
-const SUN_MASS = 100;
+const SUN_MASS = 1000;
 const CROSSHAIR_ATTRACT_G = 0.007;
 const CROSSHAIR_ATTRACT_MIN_SQ = 1;
 const CROSSHAIR_ATTRACT_MAX_SQ = 1000;
@@ -19,6 +19,13 @@ const CROSSHAIR_ATTRACT_BOOST = 10000000;
 const SUN_PULL_G = 300000;
 const SUN_PULL_MIN_SQ = 50;
 const SUN_PULL_MAX_SQ = 100;
+const VELA_PAIR_ORBIT_G = 0.012;
+const VELA_PAIR_ORBIT_SWIRL = 0.22;
+const VELA_PAIR_ORBIT_MIN_SQ = 140;
+const VELA_PAIR_ORBIT_MAX_SQ = 22000;
+const VELA_COLLISION_RESTITUTION = 0.14;
+const VELA_COLLISION_FRICTION = 0.09;
+const VELA_COLLISION_CORRECTION = 0.65;
 const SUN_AURA_BASE_SIZE = 1.35;
 const SUN_AURA_PULSE_SIZE = 0.06;
 const SUN_AURA_PULSE_RATE = 0.0012;
@@ -27,6 +34,8 @@ const CSS_DPI = 96;
 const CAPTURE_DURATION_MS = 60000;
 const CAPTURE_FILENAME = 'ovel-capture';
 const CAPTURE_FPS = 30;
+const IMAGE_CAPTURE_SCALE = 4;
+const IMAGE_CAPTURE_MAX_PIXELS = 32000000;
 const VIDEO_CAPTURE_FORMATS = [
   { mimeType: 'video/mp4;codecs=avc1' },
   { mimeType: 'video/mp4;codecs=h264' },
@@ -35,6 +44,7 @@ const VIDEO_CAPTURE_FORMATS = [
 const CAPTURE_DURATION_SECONDS = CAPTURE_DURATION_MS / 1000;
 
 let isCapturingVideo = false;
+let isCapturingImage = false;
 let captureProgressBar = null;
 let captureProgressFill = null;
 let captureProgressLabel = null;
@@ -65,7 +75,6 @@ function setup() {
 
 
 function draw() {
-  background(...BACKGROUND_COLOR);
   sun.beginSwell();
   for (let vela of velas) {
     sun.attract(vela);
@@ -74,12 +83,8 @@ function draw() {
     let strength = ((CROSSHAIR_MASS * vela.mass) / distanceSq) * CROSSHAIR_ATTRACT_G * CROSSHAIR_ATTRACT_BOOST;
     force.setMag(strength);
     vela.applyForce(force);
-    for (let other of velas) {
-      if (vela !== other) {
-        vela.attract(other);
-      }
-    }
   }
+  applySubtleVelaOrbits();
   let dx = sun.pos.x - crosshairPos.x;
   let dy = sun.pos.y - crosshairPos.y;
   let distanceSq = constrain(dx * dx + dy * dy, SUN_PULL_MIN_SQ, SUN_PULL_MAX_SQ);
@@ -90,32 +95,40 @@ function draw() {
     crosshairVel.y += ((dy / mag) * strength) / CROSSHAIR_MASS;
   }
   sun.applySwell();
+  updateCrosshair();
+  renderSceneToTarget(null, 1, showCrosshair);
+}
+
+function renderSceneToTarget(target = null, scale = 1, includeCrosshair = false) {
+  if (target) {
+    target.background(...BACKGROUND_COLOR);
+    drawSunAura(target, scale);
+    sun.show(target, scale);
+    for (let vela of velas) {
+      vela.showTrail(target, scale, width, height);
+      vela.show(target, scale);
+    }
+    if (includeCrosshair) drawCrosshair(target, scale);
+    return;
+  }
+  background(...BACKGROUND_COLOR);
   drawSunAura();
   sun.show();
   for (let vela of velas) {
     vela.update();
+  }
+  resolveVelaCollisions();
+  for (let vela of velas) {
     vela.showTrail();
     vela.show();
   }
-
-  updateCrosshair();
-
-  if (showCrosshair) {
-    push();
-    stroke(255, 0, 0, 200);
-    strokeWeight(1);
-    noFill();
-    let cx = crosshairPos.x;
-    let cy = crosshairPos.y;
-    line(cx - 6, cy, cx + 6, cy);
-    line(cx, cy - 6, cx, cy + 6);
-    pop();
-  }
+  if (includeCrosshair) drawCrosshair();
 }
 
 
 function keyPressed() {
   if (key === 'g' || key === 'G') captureMov();
+  if (key === 's' || key === 'S') captureStillImage();
   if (keyCode === ENTER) {
     showCrosshair = !showCrosshair;
   }
@@ -136,7 +149,7 @@ function applyDPI() {
 }
 
 async function captureMov() {
-  if (isCapturingVideo) return;
+  if (isCapturingVideo || isCapturingImage) return;
   isCapturingVideo = true;
   showCaptureProgress('Preparing capture...', 0, 'Starting recorder');
   let progressIntervalId = null;
@@ -224,6 +237,59 @@ async function captureMov() {
   }
 }
 
+function captureStillImage() {
+  if (isCapturingVideo || isCapturingImage) return;
+  isCapturingImage = true;
+  showCaptureProgress('Preparing image...', 0.1, 'Calculating export size');
+  try {
+    const size = computeImageCaptureSize(width, height, IMAGE_CAPTURE_SCALE, IMAGE_CAPTURE_MAX_PIXELS);
+    showCaptureProgress('Rendering image...', 0.45, `${size.exportWidth}x${size.exportHeight}`);
+
+    const pg = createGraphics(size.exportWidth, size.exportHeight);
+    pg.pixelDensity(1);
+    renderSceneToTarget(pg, size.scale, showCrosshair);
+
+    showCaptureProgress('Saving image...', 0.9, 'Encoding PNG');
+    const filename = `${CAPTURE_FILENAME}-${size.exportWidth}x${size.exportHeight}-${timestampForFilename()}.png`;
+    const dataUrl = pg.elt.toDataURL('image/png');
+    downloadDataUrl(dataUrl, filename);
+    if (typeof pg.remove === 'function') pg.remove();
+
+    showCaptureProgress('Image saved', 1, filename);
+    scheduleHideCaptureProgress();
+  } catch (error) {
+    showCaptureProgress('Image capture failed', 1, 'See console for details');
+    scheduleHideCaptureProgress();
+    console.error('Image capture failed:', error);
+  } finally {
+    isCapturingImage = false;
+  }
+}
+
+function computeImageCaptureSize(sourceWidth, sourceHeight, requestedScale, maxPixels) {
+  let scale = requestedScale;
+  const sourcePixels = sourceWidth * sourceHeight;
+  if (sourcePixels * scale * scale > maxPixels) {
+    scale = Math.sqrt(maxPixels / sourcePixels);
+  }
+  const exportWidth = max(1, floor(sourceWidth * scale));
+  const exportHeight = max(1, floor(sourceHeight * scale));
+  return { scale, exportWidth, exportHeight };
+}
+
+function timestampForFilename() {
+  const d = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+}
+
+function downloadDataUrl(dataUrl, filename) {
+  const link = document.createElement('a');
+  link.href = dataUrl;
+  link.download = filename;
+  link.click();
+}
+
 function pickSupportedVideoFormat() {
   for (let format of VIDEO_CAPTURE_FORMATS) {
     if (MediaRecorder.isTypeSupported(format.mimeType)) return format;
@@ -292,18 +358,151 @@ function ensureCaptureProgressUi() {
   document.body.appendChild(captureProgressBar);
 }
 
-function drawSunAura() {
+function drawSunAura(renderer = null, scale = 1) {
   if (!sun) return;
   let pulse = Math.sin(millis() * SUN_AURA_PULSE_RATE) * 0.5 + 0.5;
   let size = SUN_AURA_BASE_SIZE + SUN_AURA_PULSE_SIZE * pulse;
   let auraDiameter = sun.r * 2 * size;
   let auraAlpha = constrain((sun.sunAlpha / 255) * SUN_AURA_MAX_ALPHA, 0, SUN_AURA_MAX_ALPHA);
 
+  if (renderer) {
+    renderer.push();
+    renderer.noStroke();
+    renderer.blendMode(ADD);
+    renderer.fill(255, 250, 225, auraAlpha);
+    renderer.ellipse(sun.pos.x * scale, sun.pos.y * scale, auraDiameter * scale);
+    renderer.pop();
+    return;
+  }
   push();
   noStroke();
   blendMode(ADD);
   fill(255, 250, 225, auraAlpha);
   ellipse(sun.pos.x, sun.pos.y, auraDiameter);
+  pop();
+}
+
+function applySubtleVelaOrbits() {
+  for (let i = 0; i < velas.length; i++) {
+    const a = velas[i];
+    for (let j = i + 1; j < velas.length; j++) {
+      const b = velas[j];
+      let dx = b.pos.x - a.pos.x;
+      let dy = b.pos.y - a.pos.y;
+      let distSq = dx * dx + dy * dy;
+      if (distSq < VELA_PAIR_ORBIT_MIN_SQ || distSq > VELA_PAIR_ORBIT_MAX_SQ) continue;
+
+      const dist = Math.sqrt(distSq);
+      if (dist < 0.0001) continue;
+      const nx = dx / dist;
+      const ny = dy / dist;
+      const tx = -ny;
+      const ty = nx;
+
+      distSq = constrain(distSq, VELA_PAIR_ORBIT_MIN_SQ, VELA_PAIR_ORBIT_MAX_SQ);
+      const pull = ((a.mass * b.mass) / distSq) * VELA_PAIR_ORBIT_G;
+      const orbitSign = ((i + j) & 1) === 0 ? 1 : -1;
+      const swirl = pull * VELA_PAIR_ORBIT_SWIRL * orbitSign;
+
+      const fx = nx * pull + tx * swirl;
+      const fy = ny * pull + ty * swirl;
+
+      a.acc.x += fx / Math.max(a.mass, 0.0001);
+      a.acc.y += fy / Math.max(a.mass, 0.0001);
+      b.acc.x -= fx / Math.max(b.mass, 0.0001);
+      b.acc.y -= fy / Math.max(b.mass, 0.0001);
+    }
+  }
+}
+
+function resolveVelaCollisions() {
+  for (let i = 0; i < velas.length; i++) {
+    const a = velas[i];
+    for (let j = i + 1; j < velas.length; j++) {
+      const b = velas[j];
+      let dx = b.pos.x - a.pos.x;
+      let dy = b.pos.y - a.pos.y;
+      let distSq = dx * dx + dy * dy;
+      const minDist = a.r + b.r;
+      if (distSq > minDist * minDist) continue;
+
+      if (distSq < 1e-8) {
+        const n = p5.Vector.random2D();
+        dx = n.x * 0.001;
+        dy = n.y * 0.001;
+        distSq = dx * dx + dy * dy;
+      }
+
+      const dist = Math.sqrt(distSq);
+      const nx = dx / dist;
+      const ny = dy / dist;
+      const overlap = minDist - dist;
+      if (overlap <= 0) continue;
+
+      const invMassA = 1 / Math.max(a.mass, 0.0001);
+      const invMassB = 1 / Math.max(b.mass, 0.0001);
+      const invMassSum = invMassA + invMassB;
+      if (invMassSum <= 0) continue;
+
+      const correction = (overlap * VELA_COLLISION_CORRECTION) / invMassSum;
+      a.pos.x -= nx * correction * invMassA;
+      a.pos.y -= ny * correction * invMassA;
+      b.pos.x += nx * correction * invMassB;
+      b.pos.y += ny * correction * invMassB;
+
+      const rvx = b.vel.x - a.vel.x;
+      const rvy = b.vel.y - a.vel.y;
+      const velAlongNormal = rvx * nx + rvy * ny;
+      if (velAlongNormal > 0) continue;
+
+      const normalImpulseMag = (-(1 + VELA_COLLISION_RESTITUTION) * velAlongNormal) / invMassSum;
+      const impulseX = normalImpulseMag * nx;
+      const impulseY = normalImpulseMag * ny;
+      a.vel.x -= impulseX * invMassA;
+      a.vel.y -= impulseY * invMassA;
+      b.vel.x += impulseX * invMassB;
+      b.vel.y += impulseY * invMassB;
+
+      const tangentXRaw = rvx - velAlongNormal * nx;
+      const tangentYRaw = rvy - velAlongNormal * ny;
+      const tangentLen = Math.sqrt(tangentXRaw * tangentXRaw + tangentYRaw * tangentYRaw);
+      if (tangentLen < 1e-8) continue;
+
+      const tx = tangentXRaw / tangentLen;
+      const ty = tangentYRaw / tangentLen;
+      let frictionImpulseMag = (-(rvx * tx + rvy * ty)) / invMassSum;
+      const maxFriction = normalImpulseMag * VELA_COLLISION_FRICTION;
+      frictionImpulseMag = constrain(frictionImpulseMag, -maxFriction, maxFriction);
+
+      const frictionX = frictionImpulseMag * tx;
+      const frictionY = frictionImpulseMag * ty;
+      a.vel.x -= frictionX * invMassA;
+      a.vel.y -= frictionY * invMassA;
+      b.vel.x += frictionX * invMassB;
+      b.vel.y += frictionY * invMassB;
+    }
+  }
+}
+
+function drawCrosshair(renderer = null, scale = 1) {
+  const cx = crosshairPos.x;
+  const cy = crosshairPos.y;
+  if (renderer) {
+    renderer.push();
+    renderer.stroke(255, 0, 0, 200);
+    renderer.strokeWeight(1 * scale);
+    renderer.noFill();
+    renderer.line((cx - 6) * scale, cy * scale, (cx + 6) * scale, cy * scale);
+    renderer.line(cx * scale, (cy - 6) * scale, cx * scale, (cy + 6) * scale);
+    renderer.pop();
+    return;
+  }
+  push();
+  stroke(255, 0, 0, 200);
+  strokeWeight(1);
+  noFill();
+  line(cx - 6, cy, cx + 6, cy);
+  line(cx, cy - 6, cx, cy + 6);
   pop();
 }
 
