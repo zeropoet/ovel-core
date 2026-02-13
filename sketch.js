@@ -23,6 +23,7 @@ const SUN_AURA_BASE_SIZE = 1.35;
 const SUN_AURA_PULSE_SIZE = 0.06;
 const SUN_AURA_PULSE_RATE = 0.0012;
 const SUN_AURA_MAX_ALPHA = 28;
+const CSS_DPI = 96;
 const CAPTURE_DURATION_MS = 60000;
 const CAPTURE_FILENAME = 'ovel-capture';
 const CAPTURE_FPS = 30;
@@ -41,7 +42,7 @@ let captureProgressStatus = null;
 let captureHideTimer = null;
 
 function setup() {
-  applyPixelDensity();
+  applyDPI();
   cnv = createCanvas(windowWidth, windowHeight);
   cnv.position(0, 0);
   cnv.style('z-index', '0');
@@ -122,15 +123,16 @@ function keyPressed() {
 
 
 function windowResized() {
-  applyPixelDensity();
+  applyDPI();
   resizeCanvas(windowWidth, windowHeight);
   crosshairPos.set(width / 2, height / 2);
 }
 
 
-function applyPixelDensity() {
+function applyDPI() {
   const dpr = window.devicePixelRatio || 1;
-  pixelDensity(Math.min(dpr, 2));
+  const dpi = dpr * CSS_DPI;
+  pixelDensity(dpi / CSS_DPI);
 }
 
 async function captureMov() {
