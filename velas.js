@@ -109,7 +109,7 @@ class Vela {
       strokeWeight(1);
       // noFill();
     } else {
-      fill(0);
+      fill(255);
     }
     ellipse(this.pos.x, this.pos.y, this.r * 2);
   }
