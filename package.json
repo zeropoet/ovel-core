@@ -1,0 +1,13 @@
+{
+  "name": "ovel-core",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host localhost --port 5173 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host localhost --port 4173"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0"
+  }
+}
